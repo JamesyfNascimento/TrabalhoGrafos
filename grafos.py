@@ -20,7 +20,7 @@ class Grafo(object):
         if aresta:
             verticeB = aresta.pop()
         else:
-            # loop
+            # loop AQUI
             verticeB = verticeA
         if verticeA in self.__grafo:
             self.__grafo[verticeA].append(verticeB)
@@ -66,7 +66,18 @@ class Grafo(object):
             vertice_inicio = vertices[0]
         vertices_encontrados.add(vertice_inicio)
 
+    def grau_vetice(self, vertice):
+        adj_vertices =  self.__grafo[vertice]
+        grau = len(adj_vertices) + adj_vertices.count(vertice)
+        return grau
 
+    def grau_maior_vertices(self):
+        maior_grau = -1
+        for vertice in self.__grafo:
+            grau_vertice = self.grau_vetice(vertice)
+            if grau_vertice > maior_grau:
+                maior_grau = grau_vertice
+        return maior_grau
 
 
 g = { "va" : ["d"],
@@ -79,3 +90,4 @@ g = { "va" : ["d"],
 
 grafo = Grafo(g)
 print(grafo)
+print(grafo.grau_maior_vertices())
